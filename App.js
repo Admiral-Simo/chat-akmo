@@ -5,21 +5,15 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import store from "./state/store";
 import { Provider } from "react-redux";
 
-import { useDispatch, useSelector } from "react-redux";
-import { increment, decrement } from "./state/slices/counterSlice";
+import Signup from "./screens/Signup";
 
 const Stack = createNativeStackNavigator();
 
-function Test() {
-  const count = useSelector(state => state.counter.value)
-  const dispatch = useDispatch();
+function AuthStack() {
   return (
-    <View className="flex-1 items-center justify-center bg-white">
-      <Text className="text-red-500">{count}</Text>
-      <Button title='+' onPress={() => dispatch(increment())}/>
-      <Button title='-' onPress={() => dispatch(decrement())}/>
-      <StatusBar style="auto" />
-    </View>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Signup" component={Signup} />
+    </Stack.Navigator>
   );
 }
 
@@ -27,9 +21,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Provider store={store}>
-        <Stack.Navigator>
-          <Stack.Screen name="Test" component={Test} />
-        </Stack.Navigator>
+        <AuthStack />
       </Provider>
     </NavigationContainer>
   );
