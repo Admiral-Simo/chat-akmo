@@ -6,6 +6,7 @@ import store from "./state/store";
 import { Provider } from "react-redux";
 
 import Signup from "./screens/Signup";
+import Login from "./screens/Login";
 
 const Stack = createNativeStackNavigator();
 
@@ -13,6 +14,7 @@ function AuthStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Signup" component={Signup} />
+      <Stack.Screen name="Login" component={Login} />
     </Stack.Navigator>
   );
 }

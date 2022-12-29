@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config/firebase";
 import {
   Alert,
@@ -13,12 +13,12 @@ import {
 
 const backImage = require("../assets/backImage.png");
 
-export default function Signup({ navigation }) {
+export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const onHandleLogin = () => {
     if (email !== "" && password !== "") {
-      createUserWithEmailAndPassword(auth, email, password)
+      signInWithEmailAndPassword(auth, email, password)
         .then(() => console.log("login sucess"))
         .catch((err) => Alert.alert("login error", err.message));
     }
@@ -29,7 +29,7 @@ export default function Signup({ navigation }) {
       <Image source={backImage} style={styles.backImage} />
       <View style={styles.whiteSheet} />
       <SafeAreaView style={styles.form}>
-        <Text style={styles.title}>Sign Up</Text>
+        <Text style={styles.title}>Login</Text>
         <TextInput
           style={styles.input}
           placeholder="enter Email"
@@ -53,7 +53,7 @@ export default function Signup({ navigation }) {
         />
         <TouchableOpacity style={styles.button} onPress={onHandleLogin}>
           <Text style={{ fontWeight: "bold", color: "#fff", fontSize: 18 }}>
-            Sign Up
+            Log In
           </Text>
         </TouchableOpacity>
         <View
@@ -63,19 +63,12 @@ export default function Signup({ navigation }) {
             marginTop: 20,
           }}
         >
-          <Text
-            style={{
-              color: "gray",
-              fontWeight: "600",
-              fontSize: 14,
-              marginRight: 5,
-            }}
-          >
-            Already have an account?
+          <Text style={{ color: "gray", fontWeight: "600", fontSize: 14, marginRight: 5 }}>
+            Don't have an account?
           </Text>
-          <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+          <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
             <Text style={{ color: "#f57c00", fontWeight: "600", fontSize: 14 }}>
-              Log In
+              Sign Up
             </Text>
           </TouchableOpacity>
         </View>
